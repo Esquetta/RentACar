@@ -1,0 +1,68 @@
+﻿@model RentCreationDto
+@{
+    ViewData["Title"] = "RentConfirm";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var year = DateTime.Now.Year.ToString();
+    var month = DateTime.Now.Month < 10 ? "0" + DateTime.Now.Month.ToString() : DateTime.Now.Month.ToString();
+    var day = DateTime.Now.Day.ToString();
+    var date = $"{year}-{month}-{day}";
+
+}
+
+<head>
+    <script src="~/lib/jquery/dist/jquery.js"></script>
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>
+</head>
+<h1>Rent Confirm</h1>
+
+
+<div class="container">
+    <form asp-action="RentConfirm" asp-controller="Rent" method="post">
+        <div class="row">
+            <div class="col-md-10">
+                <div class="col-md-9">
+                    <div class="row ">
+                        <div class="col-md-4">
+                            <div class="card mb-4 box-shadow">
+                                <img class="card-img-top" src="@Model.Car.PhotoUrl" alt="Card image cap">
+                                <div class="card-body">
+                                    <h6>@Model.Car.Brand-@Model.Car.Model</h6>
+                                    <h6>@Model.Car.Color</h6>
+
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div class="btn-group">
+                                            <h6>Rent Price</h6> &nbsp;
+                                            <h6>@Model.Car.Price</h6>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+            <input type="hidden" asp-for="@Model.Car.Car_id" />
+            <div>
+                <input type="hidden" asp-for="@Model.Rent.Customer.Id" />
+                <input type="hidden" asp-for="@Model.Rent.Customer.UserName" />
+                <input type="hidden" asp-for="@Model.RentDetail" />
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.TakenDate"></label>
+                <input id="TakenDate" asp-for="@Model.TakenDate" type="date" min="@date" />
+                <span asp-validation-for="@Model.TakenDate"></span>
+            </div>
+            &nbsp;
+            <div class="form-group">
+                <label asp-for="@Model.ReturnDate"></label>
+                <input id="ReturnDate" asp-for="@Model.ReturnDate" type="date" min="@date" />
+                <span asp-validation-for="@Model.ReturnDate"></span>
+            </div>
+        </div>
+        <input type="submit" class="btn btn-success" value="Finish Order" />
+    </form>
+</div>
+<script src="~/js/Date.js"></script>

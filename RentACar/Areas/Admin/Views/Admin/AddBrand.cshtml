@@ -1,0 +1,18 @@
+﻿@model Brand
+@{
+    ViewData["Title"] = "AddBrand";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminHome.cshtml";
+}
+
+<h1>AddBrand</h1>
+<form asp-action="AddBrand" asp-controller="Admin">
+    <div asp-validation-summary="All">
+    </div>
+    <div class="form-group">
+        <label asp-for="BrandName"></label>
+        <input asp-for="BrandName" />
+    </div>
+    <input class="btn btn-primary" type="submit" value="Add" />
+
+</form>
+

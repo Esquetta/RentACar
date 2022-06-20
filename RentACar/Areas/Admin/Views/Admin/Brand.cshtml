@@ -1,0 +1,51 @@
+﻿@model BrandsListViewModel
+@{
+    ViewData["Title"] = "Brand";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminHome.cshtml";
+}
+<head>
+    <link rel="stylesheet" href="~/css/sidebars.css" />
+    <link href="~/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/css/Card.css" rel="stylesheet" />
+    <link href="css/Card.css" rel="stylesheet" />
+    <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="canonical" href="https://getbootstrap.com/docs/4.1/components/carousel/">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+</head>
+
+<a class="btn btn-primary" asp-action="AddBrand" asp-controller="Admin">Add new Brand</a>
+
+<table class="table table-light table-striped">
+    <thead>
+        <tr>
+            <td scope="col"> Brand Name</td>
+            <td scope="col"> Create Date</td>
+            <td scope="col">Update Date</td>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Brands)
+        {
+            <tr>
+                <td>@item.BrandName</td>
+                <td>@item.CreateDate</td>
+                <td>@item.UpdateDate</td>
+                <td>
+                    @item.BrandName
+
+                </td>
+                <td><a class="btn btn-danger" asp-controller="Admin" asp-action="DeleteBrand" asp-route-id="@item.Id">Delete</a></td>
+            </tr>
+        }
+    </tbody>
+</table>
+@if (TempData["BrandAddSuccess"] != null)
+{
+    <p class=" text text-success">@TempData["BrandAddSuccess"]</p>
+}
+@if (TempData["BrandDeleteSuccess"] != null)
+{
+    <p class="text text-success">@TempData["BrandDeleteSuccess"]</p>
+}

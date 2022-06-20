@@ -1,0 +1,14 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\RentACar.BL\RentACar.BL.csproj" />
+    <ProjectReference Include="..\RentACar.Dal\RentACar.Dal.csproj" />
+    <ProjectReference Include="..\RentACar.Entities\RentACar.Entities.csproj" />
+  </ItemGroup>
+
+</Project>

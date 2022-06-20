@@ -1,0 +1,98 @@
+﻿@model CarsListViewModel
+@{
+    ViewData["Title"] = "HomePage";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminHome.cshtml";
+}
+
+<head>
+    <link rel="stylesheet" href="~/css/sidebars.css" />
+    <link href="~/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/css/Card.css" rel="stylesheet" />
+    <link href="css/Card.css" rel="stylesheet" />
+    <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="canonical" href="https://getbootstrap.com/docs/4.1/components/carousel/">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+</head>
+<div class="container">
+    <div class="album bg-light">
+        <div class="row">
+            <div class="col-md-2">
+
+                @await Component.InvokeAsync("CarBrandList", "Admin/Admin/HomePage")
+
+
+            </div>
+
+            <div class="col-md-10">
+                <div class="row ">
+                    @foreach (var item in Model.CarForListDtos)
+                    {
+                        <div class="col-md-4">
+                            <div class="card mb-4 box-shadow">
+                                <img class="card-img-top" src="@item.PhotoUrl" alt="Card image cap">
+                                <div class="card-body">
+                                    <h6>@item.Brand-@item.Model</h6>
+                                    <h6>@item.Description</h6>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div class="btn-group">
+                                            <a class="btn btn-sm btn-outline-secondary" asp-controller="Admin" asp-action="GetCarById" asp-route-id="@item.Car_id">View</a>
+                                            <a class="btn btn-sm btn-outline-secondary btn-outline-primary" asp-controller="Admin" asp-action="AddPhoto" asp-route-id="@item.Car_id">AddPhoto Car</a>
+                                            <a class="btn btn-sm btn-outline-secondary btn-outline-warning" asp-controller="Admin" asp-action="Update" asp-route-id="@item.Car_id">Update</a>
+                                            <a class="btn btn-sm btn-outline-secondary btn-outline-danger" data-toggle="modal" data-target="#deleteCar">Delete</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal fade" id="deleteCar" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLongTitle">Car Add</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        Are you sure  delete this Car addd ?
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+                                        <a asp-action="Delete" asp-controller="Admin" asp-route-id="@item.Car_id" class="btn btn-danger">Yes</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+
+            </div>
+            <div class="col-md-2"></div>
+        </div>
+    </div>
+    @if (TempData["Updated"] != null)
+    {
+        <div class="alert alert-success" role="alert">
+            <h4 class="alert-heading">Success!</h4>
+            <p>@TempData["Updated"]</p>
+        </div>
+    }
+    @if (TempData["DeleteError"] != null)
+    {
+        <div class="alert alert-danger" role="alert">
+            <h4 class="alert-heading">Error!</h4>
+            <p>@TempData["DeleteError"]</p>
+        </div>
+    }
+    @if (TempData["DeleteSuccess"] != null)
+    {
+        <div class="alert alert-info" role="alert">
+            <h4 class="alert-heading">Info!</h4>
+            <p>@TempData["DeleteSuccess"]</p>
+        </div>
+    }
+</div>
+
+<page-list page-count="@Model.PageCount" page-size="Model.PageSize" page-currentbrand="@Model.CurrentCar" page-currentpage="@Model.CurrentPage" page-Controller="Admin/Admin/HomePage"></page-list>

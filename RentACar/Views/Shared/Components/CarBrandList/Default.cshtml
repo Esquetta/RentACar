@@ -1,0 +1,14 @@
+﻿@model CarInfoWithPageModel
+
+
+<ul class="list-group">
+    @foreach (var item in Model.Brands)
+    {
+        var css = "list-group-item ";
+        if (item.BrandName==Model.CurrentModel)
+        {
+            css += " active";
+        }
+        <li class="@css"><a href="/@Model.Page?Brand=@item.BrandName">@item.BrandName</a></li>
+    }
+</ul>
