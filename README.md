@@ -29,7 +29,7 @@ Car renter web site.
   <img src="https://cdn.discordapp.com/attachments/877557905715511318/1023600591139786752/unknown.png" height="300">
   
   <p>
- Admin can do crud operations about cars and brand and admin can extra photo for specified car.
+ Admin can do crud operations about cars and brands and admin can add extra photo for specified car.
   </p>
   
 
