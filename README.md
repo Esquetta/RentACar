@@ -24,5 +24,13 @@ Car renter web site.
  After follow mail  he can login .
   </p>
   
+  #Admin Panel
+  
+  <img src="https://cdn.discordapp.com/attachments/877557905715511318/1023600591139786752/unknown.png" height="300">
+  
+  <p>
+ Admin can do crud operations about cars and brand and admin can extra photo for specified car.
+  </p>
+  
 
 
